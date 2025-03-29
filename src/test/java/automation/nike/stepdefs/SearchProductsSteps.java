@@ -29,12 +29,18 @@ public class SearchProductsSteps {
     }
     @And("product cards should show images, names, category, number of colors, and prices")
     public void product_cards_should_show_images_names_category_number_of_colors_and_prices() {
-// Testing Jamie
-        // Negus Changes
-        // steve Changes
 
 
-// Negus Other changes
+
+
     }
 
+
+    @And("product cards should show images, names, category, number of colors, and prices")
+    public void product_cards_should_show_images_names_category_number_of_colors_and_pricesTemetriusPeppers() {
+
+
+
+
+    }
 }
