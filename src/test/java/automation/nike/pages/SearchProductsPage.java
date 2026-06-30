@@ -11,47 +11,70 @@ import java.util.List;
 
 public class SearchProductsPage {
 
-    public void searchInput(){
-        By searchBarBy = By.xpath("//input[@type='search']");
-        WebElement searchBar = DriverManager.getDriver().findElement(searchBarBy);
-
-        searchBar.sendKeys("Dunks");
+    public String getTitle(){
+        return  DriverManager.getDriver().getTitle();
     }
 
-    public void pushReturnOnSearchBar(){
-        By searchBarBy = By.xpath("//input[@type='search']");
-        WebElement searchBar = DriverManager.getDriver().findElement(searchBarBy);
+    public void searchFieldInput(String product){
+        By searchFieldBy = By.xpath("//input[@type='search']");
+        WebElement searchField = DriverManager.getDriver().findElement(searchFieldBy);
 
-        searchBar.sendKeys(Keys.RETURN);
+        searchField.sendKeys(product);
     }
 
-    public List<String> searchResults(){
-        By searchResultsBy = By.xpath("//div[@class='product_msg_info']");
-        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+    public void clickTheSearchButton(){
+        By searchFieldBy = By.xpath("//input[@type='search']");
+        WebElement searchField = DriverManager.getDriver().findElement(searchFieldBy);
 
-        org.openqa.selenium.support.ui.WebDriverWait wait =
-                new org.openqa.selenium.support.ui.WebDriverWait(
-                        DriverManager.getDriver(),
-                        5
-                );
+        searchField.sendKeys(Keys.ENTER);
+    }
 
-        wait.until(org.openqa.selenium.support.ui.ExpectedConditions
-                .presenceOfElementLocated(
-                        org.openqa.selenium.By.xpath("//div[@class='product_msg_info']")
-                )
-        );
+    public List<String> getSearchResults(){
+        By searchResultsBy = By.xpath("//div[@class='product-card__subtitle']");
+        List<WebElement> searchResults = DriverManager.getDriver().findElements(searchResultsBy);
 
+        List<String> results = new LinkedList<>();
 
-        List<WebElement> elements = DriverManager.getDriver().findElements(searchResultsBy);
-
-        List<String> values = new LinkedList<>();
-
-        for(WebElement results : elements){
-            js.executeScript("arguments[0].scrollIntoView(true);", results);
-            values.add(results.getText());
+        for(WebElement result : searchResults){
+            results.add(result.getText());
         }
 
-        return values;
+        return results;
+    }
+
+    public List<WebElement> isImageDisplayed(){
+        By imageBy = By.xpath("//img");
+        List<WebElement> images = DriverManager.getDriver().findElements(imageBy);
+
+        return images;
+    }
+
+    public List<WebElement> isTitleDisplayed(){
+        By titleBy = By.xpath("//div[@class='product-card__title']");
+        List<WebElement> titles = DriverManager.getDriver().findElements(titleBy);
+
+        return titles;
+    }
+
+    public List<WebElement> isSubTitleDisplayed(){
+        By subTitleBy = By.xpath("//div[@class='product-card__subtitle']");
+        List<WebElement> subTitles = DriverManager.getDriver().findElements(subTitleBy);
+
+        return subTitles;
+    }
+
+    public List<WebElement> isColorWayDisplayed(){
+        By colorWayBy = By.xpath("//div[@class='product-card__count-item']");
+        List<WebElement> colorWay = DriverManager.getDriver().findElements(colorWayBy);
+
+        return colorWay;
+    }
+
+    public List<WebElement> isPriceDisplayed(){
+        By priceBy = By.xpath("//div[@class='product-card__price']");
+        List<WebElement> price = DriverManager.getDriver().findElements(priceBy);
+
+        return price;
     }
 
 }
